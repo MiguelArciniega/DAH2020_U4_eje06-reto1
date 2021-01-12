@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar slot="start">
+    <ion-back-button default="/"></ion-back-button>
+    <ion-title>{{student.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list>
+      <ion-fab-button color="success">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="warning">
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="danger" (click)="delete(student.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-card text-center>
+    <ion-card-header>
+      <ion-card-subtitle>{{student.name}}</ion-card-subtitle>
+      <ion-card-title>{{student.controlnumber}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="myForm">
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <header>
+              <h3>Modificar Alumno</h3>
+            </header>
+            <main padding>
+              <ion-item>
+                <ion-label position="stacked">Curp</ion-label>
+                <ion-input formControlName="curp" type="text">
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Edad</ion-label>
+                <ion-input name="age" formControlName="age" type="number">
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Activo</ion-label>
+                <ion-toggle formControlName="active" color="secondary" (click)="student.active = !student.active">
+                </ion-toggle>
+              </ion-item>
+            </main>
+            <footer padding>
+              <ion-button size="large" type="button" [disabled]="!myForm.valid"
+                (click)="update(student, student.active)" expand="block">
+                Guardar
+              </ion-button>
+            </footer>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
